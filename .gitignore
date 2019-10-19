@@ -3,3 +3,12 @@
 ################################################################################
 
 /.vs
+/CoreCodedChatbot.Database/.vs/config/applicationhost.config
+/CoreCodedChatbot.Database/.vs/CoreCodedChatbot.Database/DesignTimeBuild
+/CoreCodedChatbot.Database/.vs/CoreCodedChatbot.Database/v15
+/CoreCodedChatbot.Database/CoreCodedChatbot.Database/.vs/CoreCodedChatbot.Database/v15
+/CoreCodedChatbot.Database/CoreCodedChatbot.Database/bin/Debug
+/CoreCodedChatbot.Database/CoreCodedChatbot.Database/obj
+/CoreCodedChatbot.Database/CoreCodedChatbot.Database/config.json
+/CoreCodedChatbot.Database/CoreCodedChatbot.Database/CoreCodedChatbot.Database.csproj.vspscc
+/CoreCodedChatbot.Database/CoreCodedChatbot.Database/CoreCodedChatbot.Database.csproj.user
