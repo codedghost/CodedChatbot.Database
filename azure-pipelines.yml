@@ -9,8 +9,7 @@ trigger:
 pool:
   vmImage: 'ubuntu-latest'
 
-- script: |
-  displayName: 'Publish package'
+steps:
 - task: NuGetCommand@2
   inputs:
     command: 'restore'
@@ -27,3 +26,14 @@ pool:
     packagesToPack: '**/*.csproj'
     versioningScheme: 'byBuildNumber'
     includeSymbols: true
+- task: NuGetCommand@2
+  inputs:
+    command: 'push'
+    packagesToPush: '$(Build.ArtifactStagingDirectory)/**/*.nupkg;!$(Build.ArtifactStagingDirectory)/**/*.symbols.nupkg'
+    nuGetFeedType: 'internal'
+    publishVstsFeed: '087f7b3b-2160-4d35-8fb9-36edb3d5651b'
+- task: PublishBuildArtifacts@1
+  inputs:
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+    ArtifactName: 'dbDrop'
+    publishLocation: 'Container'
