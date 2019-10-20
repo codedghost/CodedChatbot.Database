@@ -23,9 +23,9 @@ steps:
 - task: CmdLine@2
   inputs:
     script: |
-      cp $(config.secureFilePath)/ApiArchConfig.json $(Build.Repository.LocalPath)/CoreCodedChatbot.Database/config.json
+      cp $(config.secureFilePath) $(Build.Repository.LocalPath)/CoreCodedChatbot.Database/config.json
       
-      rm $(config.secureFilePath)/ApiArchConfig.json
+      rm $(config.secureFilePath)
 - task: DotNetCoreCLI@2
   inputs:
     command: 'build'
