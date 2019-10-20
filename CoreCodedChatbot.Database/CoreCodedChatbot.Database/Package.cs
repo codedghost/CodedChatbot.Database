@@ -6,7 +6,7 @@ namespace CoreCodedChatbot.Database
 {
     public static class Package
     {
-        public static ServiceCollection AddDbContextFactory(this ServiceCollection services)
+        public static IServiceCollection AddDbContextFactory(this IServiceCollection services)
         {
             services.AddTransient<IChatbotContextFactory, ChatbotContextFactory>();
 
