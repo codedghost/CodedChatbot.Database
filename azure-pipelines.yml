@@ -16,6 +16,12 @@ steps:
     projects: '**/*.csproj'
     feedsToUse: 'select'
     vstsFeed: '087f7b3b-2160-4d35-8fb9-36edb3d5651b'
+- task: DownloadSecureFile@1
+  inputs:
+    secureFile: 'ApiArchConfig.json'
+- task: CmdLine@2
+  inputs:
+    script: 'cp $(Agent.BuildDirectory)/ApiArchConfig.json $(Build.Repository.LocalPath)/CoreCodedChatbot.Database/config.json'
 - task: DotNetCoreCLI@2
   inputs:
     command: 'build'
