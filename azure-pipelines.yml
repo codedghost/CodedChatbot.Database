@@ -30,23 +30,12 @@ steps:
       rm $(config.secureFilePath)
 - task: DotNetCoreCLI@2
   inputs:
-    command: 'build'
-    projects: '**/CoreCodedChatbot.Database.csproj'
-- task: CmdLine@2
-  inputs:
-    script: 'rm $(Build.Repository.LocalPath)/CoreCodedChatbot.Database/CoreCodedChatbot.Database/config.json'
-- task: NuGetCommand@2
-  inputs:
     command: 'pack'
     packagesToPack: '**/*.csproj'
     versioningScheme: 'byBuildNumber'
-    includeSymbols: true
-- task: NuGetCommand@2
+- task: CmdLine@2
   inputs:
-    command: 'push'
-    packagesToPush: '$(Build.ArtifactStagingDirectory)/**/*.nupkg;!$(Build.ArtifactStagingDirectory)/**/*.symbols.nupkg'
-    nuGetFeedType: 'internal'
-    publishVstsFeed: '087f7b3b-2160-4d35-8fb9-36edb3d5651b'
+    script: 'rm $(Build.Repository.LocalPath)/CoreCodedChatbot.Database/CoreCodedChatbot.Database/config.json'
 - task: PublishBuildArtifacts@1
   inputs:
     PathtoPublish: '$(Build.ArtifactStagingDirectory)'
