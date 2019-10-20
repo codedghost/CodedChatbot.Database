@@ -18,24 +18,11 @@ steps:
     projects: '**/*.csproj'
     feedsToUse: 'select'
     vstsFeed: '087f7b3b-2160-4d35-8fb9-36edb3d5651b'
-- task: DownloadSecureFile@1
-  name: config
-  inputs:
-    secureFile: 'ApiArchConfig.json'
-- task: CmdLine@2
-  inputs:
-    script: |
-      cp $(config.secureFilePath) $(Build.Repository.LocalPath)/CoreCodedChatbot.Database/CoreCodedChatbot.Database/config.json
-      
-      rm $(config.secureFilePath)
 - task: DotNetCoreCLI@2
   inputs:
     command: 'pack'
     packagesToPack: '**/*.csproj'
     versioningScheme: 'byBuildNumber'
-- task: CmdLine@2
-  inputs:
-    script: 'rm $(Build.Repository.LocalPath)/CoreCodedChatbot.Database/CoreCodedChatbot.Database/config.json'
 - task: PublishBuildArtifacts@1
   inputs:
     PathtoPublish: '$(Build.ArtifactStagingDirectory)'
