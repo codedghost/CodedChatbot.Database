@@ -9,7 +9,7 @@ trigger:
 pool:
   vmImage: 'ubuntu-latest'
 
-name: $(BuildDefinitionName)_$(SourceBranchName)_$(Date:yyyyMMdd)
+name: $(BuildID)_$(Rev:r)
 
 steps:
 - task: DotNetCoreCLI@2
