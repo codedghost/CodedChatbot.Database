@@ -23,7 +23,7 @@ steps:
 - task: CmdLine@2
   inputs:
     script: |
-      cp $(config.secureFilePath) $(Build.Repository.LocalPath)/CoreCodedChatbot.Database/config.json
+      cp $(config.secureFilePath) $(Build.Repository.LocalPath)/CoreCodedChatbot.Database/CoreCodedChatbot.Database/config.json
       
       rm $(config.secureFilePath)
 - task: DotNetCoreCLI@2
@@ -32,7 +32,7 @@ steps:
     projects: '**/CoreCodedChatbot.Database.csproj'
 - task: CmdLine@2
   inputs:
-    script: 'rm $(Build.Repository.LocalPath)/CoreCodedChatbot.Database/config.json'
+    script: 'rm $(Build.Repository.LocalPath)/CoreCodedChatbot.Database/CoreCodedChatbot.Database/config.json'
 - task: NuGetCommand@2
   inputs:
     command: 'pack'
