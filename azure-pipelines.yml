@@ -21,11 +21,17 @@ steps:
     secureFile: 'ApiArchConfig.json'
 - task: CmdLine@2
   inputs:
-    script: 'cp $(Agent.BuildDirectory)/ApiArchConfig.json $(Build.Repository.LocalPath)/CoreCodedChatbot.Database/config.json'
+    script: |
+      cp $(Agent.BuildDirectory)/ApiArchConfig.json $(Build.Repository.LocalPath)/CoreCodedChatbot.Database/config.json
+      
+      rm $(Agent.BuildDirectory)/ApiArchConfig.json
 - task: DotNetCoreCLI@2
   inputs:
     command: 'build'
     projects: '**/CoreCodedChatbot.Database.csproj'
+- task: CmdLine@2
+  inputs:
+    script: 'rm $(Build.Repository.LocalPath)/CoreCodedChatbot.Database/config.json'
 - task: NuGetCommand@2
   inputs:
     command: 'pack'
