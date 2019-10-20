@@ -32,6 +32,8 @@ steps:
   inputs:
     command: 'pack'
     packagesToPack: '**/*.csproj'
+    includesymbols: true
+    includesource: true
     versioningScheme: 'byBuildNumber'
 - task: CmdLine@2
   inputs:
