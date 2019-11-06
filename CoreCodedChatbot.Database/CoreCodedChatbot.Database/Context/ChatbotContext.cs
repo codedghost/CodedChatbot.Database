@@ -43,12 +43,11 @@ namespace CoreCodedChatbot.Database.Context
                 .AddJsonFile($"appsettings.{Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT")}.json", true, true);
 
             ConfigRoot = builder.Build();
-            
-            // Reconstructing path for platform independency
-            var dbConn = Path.GetFullPath(ConfigRoot["LocalDbLocation"]);
+
+            var connectionString = ConfigRoot["DbConnectionString"];
 
             if (!optionsBuilder.IsConfigured)
-                optionsBuilder.UseSqlite($"FileName={dbConn}");
+                optionsBuilder.UseSqlServer(connectionString);
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
