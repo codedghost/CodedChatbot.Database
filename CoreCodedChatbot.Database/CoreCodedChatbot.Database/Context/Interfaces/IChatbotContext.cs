@@ -18,6 +18,7 @@ namespace CoreCodedChatbot.Database.Context.Interfaces
         DbSet<InfoCommand> InfoCommands { get; set; }
         DbSet<InfoCommandKeyword> InfoCommandKeywords { get; set; }
         DbSet<StreamStatus> StreamStatuses { get; set; }
+        DbSet<LogEntry> LogEntries { get; set; }
 
         int SaveChanges();
 
