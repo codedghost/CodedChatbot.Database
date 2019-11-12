@@ -16,6 +16,12 @@ namespace CoreCodedChatbot.Database.Context
     {
         private readonly ISecretService _secretService;
 
+        public ChatbotContext()
+            : base()
+        {
+
+        }
+
         public ChatbotContext(ISecretService secretService)
             : base()
         {
@@ -36,6 +42,7 @@ namespace CoreCodedChatbot.Database.Context
         public DbSet<InfoCommand> InfoCommands { get; set; }
         public DbSet<InfoCommandKeyword> InfoCommandKeywords { get; set; }
         public DbSet<StreamStatus> StreamStatuses { get; set; }
+        public DbSet<LogEntry> LogEntries { get; set; }
 
         private IConfigurationRoot ConfigRoot { get; set; }
 
@@ -71,6 +78,7 @@ namespace CoreCodedChatbot.Database.Context
             modelBuilder.AddConfiguration(new InfoCommandMap());
             modelBuilder.AddConfiguration(new InfoCommandKeywordMap());
             modelBuilder.AddConfiguration(new StreamStatusMap());
+            modelBuilder.AddConfiguration(new LogEntryMap());
         }
     }
 }
