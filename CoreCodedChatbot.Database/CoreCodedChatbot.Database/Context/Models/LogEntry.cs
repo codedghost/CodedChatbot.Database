@@ -16,5 +16,6 @@ namespace CoreCodedChatbot.Database.Context.Models
         public string Exception { get; set; }
         public string StackTrace { get; set; }
         public string ProcessName { get; set; }
+        public string AppDomain { get; set; }
     }
 }
