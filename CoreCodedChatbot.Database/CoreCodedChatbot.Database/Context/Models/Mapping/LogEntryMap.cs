@@ -19,6 +19,7 @@ namespace CoreCodedChatbot.Database.Context.Models.Mapping
             builder.Property(t => t.Exception).HasColumnName("Exception");
             builder.Property(t => t.StackTrace).HasColumnName("StackTrace");
             builder.Property(t => t.ProcessName).HasColumnName("ProcessName").IsRequired();
+            builder.Property(t => t.AppDomain).HasColumnName("AppDomain").IsRequired().HasDefaultValue(string.Empty);
         }
     }
 }
