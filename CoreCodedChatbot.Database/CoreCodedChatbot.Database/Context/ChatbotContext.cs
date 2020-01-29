@@ -43,6 +43,7 @@ namespace CoreCodedChatbot.Database.Context
         public DbSet<InfoCommandKeyword> InfoCommandKeywords { get; set; }
         public DbSet<StreamStatus> StreamStatuses { get; set; }
         public DbSet<LogEntry> LogEntries { get; set; }
+        public DbSet<Quote> Quotes { get; set; }
 
         private IConfigurationRoot ConfigRoot { get; set; }
 
