@@ -12,5 +12,6 @@ namespace CoreCodedChatbot.Database.Context.Models
         public DateTime LastEdited { get; set; }
         public string CreatedBy { get; set; }
         public bool Enabled { get; set; }
+        public string LastEditedBy { get; set; }
     }
 }
