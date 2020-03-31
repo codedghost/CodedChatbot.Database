@@ -20,6 +20,7 @@ namespace CoreCodedChatbot.Database.Context.Interfaces
         DbSet<StreamStatus> StreamStatuses { get; set; }
         DbSet<LogEntry> LogEntries { get; set; }
         DbSet<Quote> Quotes { get; set; }
+        DbSet<SearchSynonymRequest> SearchSynonymRequests { get; set; }
 
         int SaveChanges();
 

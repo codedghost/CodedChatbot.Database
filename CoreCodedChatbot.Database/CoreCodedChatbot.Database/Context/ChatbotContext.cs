@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using CoreCodedChatbot.Database.Context.Interfaces;
@@ -44,6 +45,7 @@ namespace CoreCodedChatbot.Database.Context
         public DbSet<StreamStatus> StreamStatuses { get; set; }
         public DbSet<LogEntry> LogEntries { get; set; }
         public DbSet<Quote> Quotes { get; set; }
+        public DbSet<SearchSynonymRequest> SearchSynonymRequests { get; set; }
 
         private IConfigurationRoot ConfigRoot { get; set; }
 
@@ -80,6 +82,7 @@ namespace CoreCodedChatbot.Database.Context
             modelBuilder.AddConfiguration(new InfoCommandKeywordMap());
             modelBuilder.AddConfiguration(new StreamStatusMap());
             modelBuilder.AddConfiguration(new LogEntryMap());
+            modelBuilder.AddConfiguration(new SearchSynonymRequestMap());
         }
     }
 }
