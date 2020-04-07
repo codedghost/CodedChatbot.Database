@@ -7,9 +7,9 @@ namespace CoreCodedChatbot.Database
 {
     public static class GetOrCreateUserExtension
     {
-        public static User GetOrCreateUser(this IChatbotContext context, string username)
+        public static User GetOrCreateUser(this IChatbotContext context, string username, bool deferSaveIfCreate = false)
         {
-            return Get(context, username) ?? Create(context, username);
+            return Get(context, username) ?? Create(context, username, deferSaveIfCreate);
         }
 
         private static User Get(IChatbotContext context, string username)
@@ -19,7 +19,7 @@ namespace CoreCodedChatbot.Database
             return user;
         }
 
-        private static User Create(IChatbotContext context, string username)
+        private static User Create(IChatbotContext context, string username, bool deferSave)
         {
             var user = new User
             {
@@ -41,7 +41,8 @@ namespace CoreCodedChatbot.Database
 
             context.Users.Add(user);
 
-            context.SaveChanges();
+            if (!deferSave)
+                context.SaveChanges();
 
             return user;
         }
