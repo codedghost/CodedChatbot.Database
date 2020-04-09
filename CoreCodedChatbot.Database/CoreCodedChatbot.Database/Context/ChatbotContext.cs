@@ -46,6 +46,7 @@ namespace CoreCodedChatbot.Database.Context
         public DbSet<LogEntry> LogEntries { get; set; }
         public DbSet<Quote> Quotes { get; set; }
         public DbSet<SearchSynonymRequest> SearchSynonymRequests { get; set; }
+        public DbSet<ModerationLog> ModerationLogs { get; set; }
 
         private IConfigurationRoot ConfigRoot { get; set; }
 
@@ -83,6 +84,7 @@ namespace CoreCodedChatbot.Database.Context
             modelBuilder.AddConfiguration(new StreamStatusMap());
             modelBuilder.AddConfiguration(new LogEntryMap());
             modelBuilder.AddConfiguration(new SearchSynonymRequestMap());
+            modelBuilder.AddConfiguration(new ModerationLogMap());
         }
     }
 }

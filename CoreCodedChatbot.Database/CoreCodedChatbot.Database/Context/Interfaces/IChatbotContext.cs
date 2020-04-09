@@ -21,6 +21,7 @@ namespace CoreCodedChatbot.Database.Context.Interfaces
         DbSet<LogEntry> LogEntries { get; set; }
         DbSet<Quote> Quotes { get; set; }
         DbSet<SearchSynonymRequest> SearchSynonymRequests { get; set; }
+        DbSet<ModerationLog> ModerationLogs { get; set; }
 
         int SaveChanges();
 
