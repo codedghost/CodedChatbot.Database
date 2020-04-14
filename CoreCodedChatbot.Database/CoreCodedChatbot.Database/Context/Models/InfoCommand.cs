@@ -10,6 +10,7 @@ namespace CoreCodedChatbot.Database.Context.Models
         public int InfoCommandId { get; set; }
         public string InfoText { get; set; }
         public string InfoHelpText { get; set; }
+        public string AddedByUser { get; set; }
 
         public virtual ICollection<InfoCommandKeyword> InfoCommandKeywords { get; set; }
     }

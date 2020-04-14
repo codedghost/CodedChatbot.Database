@@ -14,6 +14,7 @@ namespace CoreCodedChatbot.Database.Context.Models.Mapping
             builder.Property(t => t.InfoCommandId).HasColumnName("InfoCommandId").IsRequired();
             builder.Property(t => t.InfoText).HasColumnName("InfoText").IsRequired();
             builder.Property(t => t.InfoHelpText).HasColumnName("InfoHelpText").IsRequired();
+            builder.Property(t => t.AddedByUser).HasColumnName("Username").IsRequired();
 
             builder.HasMany(infoCommand => infoCommand.InfoCommandKeywords)
                 .WithOne(infoCommandKeyword => infoCommandKeyword.InfoCommand)
