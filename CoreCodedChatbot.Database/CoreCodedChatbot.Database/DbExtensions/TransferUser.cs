@@ -28,8 +28,6 @@ namespace CoreCodedChatbot.Database.DbExtensions
             TransferChatCommands(context, oldUsername, newUsername);
             TransferVipsAndBytes(context, oldUser, newUser);
             LogTransfer(context, moderatorUsername, oldUsername, newUsername);
-
-            context.SaveChanges();
         }
 
         private static void TransferQuotes(IChatbotContext context, string oldUsername, string newUsername)
