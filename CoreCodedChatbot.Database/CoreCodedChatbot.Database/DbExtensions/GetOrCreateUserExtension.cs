@@ -3,7 +3,7 @@ using System.Linq;
 using CoreCodedChatbot.Database.Context.Interfaces;
 using CoreCodedChatbot.Database.Context.Models;
 
-namespace CoreCodedChatbot.Database
+namespace CoreCodedChatbot.Database.DbExtensions
 {
     public static class GetOrCreateUserExtension
     {
