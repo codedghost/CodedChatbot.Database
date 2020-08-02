@@ -23,6 +23,8 @@ namespace CoreCodedChatbot.Database.Context.Models.Mapping
             builder.Property(t => t.ModGivenVipRequests).HasColumnName("ModGivenVipRequests").IsRequired();
             builder.Property(t => t.FollowVipRequest).HasColumnName("FollowVipRequest").IsRequired();
             builder.Property(t => t.SubVipRequests).HasColumnName("SubVipRequests").IsRequired();
+            builder.Property(t => t.Tier2Vips).HasColumnName("Tier2Vips").IsRequired().HasDefaultValue(0);
+            builder.Property(t => t.Tier3Vips).HasColumnName("Tier3Vips").IsRequired().HasDefaultValue(0);
             builder.Property(t => t.DonationOrBitsVipRequests).HasColumnName("DonationOrBitsVipRequests").IsRequired();
             builder.Property(t => t.ReceivedGiftVipRequests).HasColumnName("ReceivedGiftVipRequests")
                 .IsRequired()

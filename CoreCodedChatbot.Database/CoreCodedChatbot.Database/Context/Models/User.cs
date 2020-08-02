@@ -14,6 +14,8 @@ namespace CoreCodedChatbot.Database.Context.Models
         public int ModGivenVipRequests { get; set; }
         public int FollowVipRequest { get; set; }
         public int SubVipRequests { get; set; }
+        public int Tier2Vips { get; set; }
+        public int Tier3Vips { get; set; }
         public int DonationOrBitsVipRequests { get; set; }
         public int ReceivedGiftVipRequests { get; set; }
         public int TokenVipRequests { get; set; }
