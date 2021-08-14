@@ -33,6 +33,7 @@ namespace CoreCodedChatbot.Database.Context.Models.Mapping
             builder.Property(t => t.TotalBitsDropped).HasColumnName("TotalBitsDropped");
             builder.Property(t => t.TotalDonated).HasColumnName("TotalDonated");
             builder.Property(t => t.TimeLastInChat).HasColumnName("TimeLastInChat");
+            builder.Property(t => t._clientIds).HasColumnName("ClientIds");
         }
     }
 }
