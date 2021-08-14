@@ -23,5 +23,6 @@ namespace CoreCodedChatbot.Database.Context.Models
         public int TotalBitsDropped { get; set; }
         public int TotalDonated { get; set; }
         public DateTime TimeLastInChat { get; set; }
+        public string ClientIds { get; set; }
     }
 }
