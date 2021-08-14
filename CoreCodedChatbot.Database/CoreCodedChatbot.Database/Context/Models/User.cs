@@ -28,20 +28,17 @@ namespace CoreCodedChatbot.Database.Context.Models
         public DateTime TimeLastInChat { get; set; }
         internal string _clientIds { get; set; }
 
-        [NotMapped]
-        public IDictionary<string, List<string>> ClientIds
+        public IDictionary<string, List<string>> GetClientIdsDictionary()
         {
-            get
-            {
-                if (string.IsNullOrWhiteSpace(_clientIds)) return new Dictionary<string, List<string>>();
+            if (string.IsNullOrWhiteSpace(_clientIds)) return new Dictionary<string, List<string>>();
 
-                return JsonConvert.DeserializeObject<IDictionary<string, List<string>>>(_clientIds);
-            }
-            set
-            {
-                if (value == null) _clientIds = JsonConvert.SerializeObject(new Dictionary<string, List<string>>());
-                _clientIds = JsonConvert.SerializeObject(value);
-            }
+            return JsonConvert.DeserializeObject<IDictionary<string, List<string>>>(_clientIds);
+        }
+
+        public void UpdateClientIdsDictionary(IDictionary<string, List<string>> dict)
+        {
+            if (dict == null) _clientIds = JsonConvert.SerializeObject(new Dictionary<string, List<string>>());
+            _clientIds = JsonConvert.SerializeObject(dict);
         }
     }
 }
