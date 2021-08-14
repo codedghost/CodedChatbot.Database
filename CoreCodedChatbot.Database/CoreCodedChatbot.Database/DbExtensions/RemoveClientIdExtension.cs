@@ -10,7 +10,15 @@ namespace CoreCodedChatbot.Database.DbExtensions
         {
             var user = users.SingleOrDefault(u => u._clientIds.Contains(clientId));
 
-            user?.ClientIds[hubType].Remove(clientId);
+            if (user == null) return;
+
+            var clientIds = user.GetClientIdsDictionary();
+            if (clientIds.Any() && clientIds.ContainsKey(hubType))
+            {
+                clientIds[hubType].Remove(clientId);
+            }
+
+            user.UpdateClientIdsDictionary(clientIds);
         }
     }
 }
