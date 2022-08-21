@@ -291,11 +291,6 @@ namespace CoreCodedChatbot.Database.Migrations
                         .HasColumnName("ChartedPaths")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("DownloadUrl")
-                        .IsRequired()
-                        .HasColumnName("DownloadUrl")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<bool>("IsOfficial")
                         .HasColumnName("IsOfficial")
                         .HasColumnType("bit");
@@ -331,10 +326,6 @@ namespace CoreCodedChatbot.Database.Migrations
                         .IsRequired()
                         .HasColumnName("UploaderUsername")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<decimal>("Version")
-                        .HasColumnName("Version")
-                        .HasColumnType("decimal(18,2)");
 
                     b.HasKey("SongId");
 
@@ -440,6 +431,29 @@ namespace CoreCodedChatbot.Database.Migrations
                     b.ToTable("SongRequests");
                 });
 
+            modelBuilder.Entity("CoreCodedChatbot.Database.Context.Models.SongUrlVersion", b =>
+                {
+                    b.Property<int>("SongUrlVersionId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("SongId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Url")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<decimal>("Version")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.HasKey("SongUrlVersionId");
+
+                    b.HasIndex("SongId");
+
+                    b.ToTable("SongUrlVersion");
+                });
+
             modelBuilder.Entity("CoreCodedChatbot.Database.Context.Models.StreamStatus", b =>
                 {
                     b.Property<int>("StreamStatusId")
@@ -467,9 +481,6 @@ namespace CoreCodedChatbot.Database.Migrations
                     b.Property<string>("Username")
                         .HasColumnName("Username")
                         .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("ClientIds")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("DonationOrBitsVipRequests")
                         .HasColumnName("DonationOrBitsVipRequests")
@@ -539,6 +550,10 @@ namespace CoreCodedChatbot.Database.Migrations
                         .HasColumnName("UsedVipRequests")
                         .HasColumnType("int");
 
+                    b.Property<string>("_clientIds")
+                        .HasColumnName("ClientIds")
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("Username");
 
                     b.ToTable("Users");
@@ -567,6 +582,15 @@ namespace CoreCodedChatbot.Database.Migrations
                     b.HasOne("CoreCodedChatbot.Database.Context.Models.SongGuessingRecord", "SongGuessingRecord")
                         .WithMany("SongPercentageGuesses")
                         .HasForeignKey("SongGuessingRecordId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("CoreCodedChatbot.Database.Context.Models.SongUrlVersion", b =>
+                {
+                    b.HasOne("CoreCodedChatbot.Database.Context.Models.Song", "Song")
+                        .WithMany("Urls")
+                        .HasForeignKey("SongId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
