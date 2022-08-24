@@ -416,7 +416,7 @@ namespace CoreCodedChatbot.Database.Migrations
                         .HasColumnType("nvarchar(255)")
                         .HasMaxLength(255);
 
-                    b.Property<int>("SongId")
+                    b.Property<int?>("SongId")
                         .HasColumnName("SongId")
                         .HasColumnType("int");
 
@@ -427,6 +427,8 @@ namespace CoreCodedChatbot.Database.Migrations
                         .HasColumnType("datetime2");
 
                     b.HasKey("SongRequestId");
+
+                    b.HasIndex("SongId");
 
                     b.ToTable("SongRequests");
                 });
@@ -584,6 +586,13 @@ namespace CoreCodedChatbot.Database.Migrations
                         .HasForeignKey("SongGuessingRecordId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("CoreCodedChatbot.Database.Context.Models.SongRequest", b =>
+                {
+                    b.HasOne("CoreCodedChatbot.Database.Context.Models.Song", "Song")
+                        .WithMany("SongRequests")
+                        .HasForeignKey("SongId");
                 });
 
             modelBuilder.Entity("CoreCodedChatbot.Database.Context.Models.SongUrlVersion", b =>

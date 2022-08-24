@@ -24,7 +24,7 @@ namespace CoreCodedChatbot.Database.Context.Models.Mapping
             builder.Property(t => t.ChartedPaths).HasColumnName("ChartedPaths").IsRequired();
             builder.Property(t => t.IsOfficial).HasColumnName("IsOfficial").IsRequired();
 
-            //builder.HasMany(t => t.SongRequests).WithOne(o => o.Song).HasForeignKey(k => k.SongId);
+            builder.HasMany(t => t.SongRequests).WithOne(o => o.Song).HasForeignKey(k => k.SongId);
         }
     }
 }

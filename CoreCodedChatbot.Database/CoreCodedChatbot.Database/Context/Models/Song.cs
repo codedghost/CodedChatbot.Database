@@ -22,6 +22,6 @@ namespace CoreCodedChatbot.Database.Context.Models
         public bool IsOfficial { get; set; }
         public virtual List<SongUrlVersion> Urls { get; set; }
 
-        //public virtual List<SongRequest> SongRequests { get; set; }
+        public virtual List<SongRequest> SongRequests { get; set; }
     }
 }
