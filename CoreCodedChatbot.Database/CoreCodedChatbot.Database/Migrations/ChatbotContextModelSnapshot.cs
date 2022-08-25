@@ -71,6 +71,30 @@ namespace CoreCodedChatbot.Database.Migrations
                     b.ToTable("ChannelRewardRedemption");
                 });
 
+            modelBuilder.Entity("CoreCodedChatbot.Database.Context.Models.Charter", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnName("Id")
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnName("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("Preferred")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnName("Preferred")
+                        .HasColumnType("bit")
+                        .HasDefaultValue(false);
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Charters");
+                });
+
             modelBuilder.Entity("CoreCodedChatbot.Database.Context.Models.InfoCommand", b =>
                 {
                     b.Property<int>("InfoCommandId")
@@ -291,6 +315,10 @@ namespace CoreCodedChatbot.Database.Migrations
                         .HasColumnName("ChartedPaths")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("CharterId")
+                        .HasColumnName("CharterId")
+                        .HasColumnType("int");
+
                     b.Property<bool>("IsOfficial")
                         .HasColumnName("IsOfficial")
                         .HasColumnType("bit");
@@ -322,12 +350,9 @@ namespace CoreCodedChatbot.Database.Migrations
                         .HasColumnName("UploadedDateTime")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("UploaderUsername")
-                        .IsRequired()
-                        .HasColumnName("UploaderUsername")
-                        .HasColumnType("nvarchar(max)");
-
                     b.HasKey("SongId");
+
+                    b.HasIndex("CharterId");
 
                     b.ToTable("Songs");
                 });
@@ -575,6 +600,15 @@ namespace CoreCodedChatbot.Database.Migrations
                     b.HasOne("CoreCodedChatbot.Database.Context.Models.InfoCommand", "InfoCommand")
                         .WithMany("InfoCommandKeywords")
                         .HasForeignKey("InfoCommandId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("CoreCodedChatbot.Database.Context.Models.Song", b =>
+                {
+                    b.HasOne("CoreCodedChatbot.Database.Context.Models.Charter", "Charter")
+                        .WithMany("Songs")
+                        .HasForeignKey("CharterId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

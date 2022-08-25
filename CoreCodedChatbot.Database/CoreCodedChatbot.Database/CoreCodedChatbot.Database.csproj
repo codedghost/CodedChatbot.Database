@@ -21,6 +21,10 @@
     <Compile Remove="Migrations\20220824142707_AddingSongLinkToSongRequest.Designer.cs" />
     <Compile Remove="Migrations\20220824143423_AddingSongLinkToSongRequest.cs" />
     <Compile Remove="Migrations\20220824143423_AddingSongLinkToSongRequest.Designer.cs" />
+    <Compile Remove="Migrations\20220825093630_AddingCharterTable.cs" />
+    <Compile Remove="Migrations\20220825093630_AddingCharterTable.Designer.cs" />
+    <Compile Remove="Migrations\20220825095144_AddingCharterTable.cs" />
+    <Compile Remove="Migrations\20220825095144_AddingCharterTable.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

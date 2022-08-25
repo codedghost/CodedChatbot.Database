@@ -24,6 +24,7 @@ namespace CoreCodedChatbot.Database.Context.Interfaces
         DbSet<ModerationLog> ModerationLogs { get; set; }
         DbSet<ChannelReward> ChannelRewards { get; set; }
         DbSet<ChannelRewardRedemption> ChannelRewardRedemptions { get; set; }
+        DbSet<Charter> Charters { get; set; }
 
         int SaveChanges();
 
