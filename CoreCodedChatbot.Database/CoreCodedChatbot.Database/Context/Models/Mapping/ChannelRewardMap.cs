@@ -14,6 +14,7 @@ namespace CoreCodedChatbot.Database.Context.Models.Mapping
             builder.Property(t => t.ChannelRewardId).HasColumnName("ChannelRewardId").IsRequired();
             builder.Property(t => t.RewardTitle).HasColumnName("RewardTitle").IsRequired();
             builder.Property(t => t.RewardDescription).HasColumnName("RewardDescription").IsRequired();
+            builder.Property(t => t.CommandId).HasColumnName("CommandId").IsRequired();
 
             builder.HasMany(channelReward => channelReward.Redemptions)
                 .WithOne(channelRewardRedemption => channelRewardRedemption.Reward)
