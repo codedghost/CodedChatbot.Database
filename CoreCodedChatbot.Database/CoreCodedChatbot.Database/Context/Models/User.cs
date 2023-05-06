@@ -22,6 +22,7 @@ namespace CoreCodedChatbot.Database.Context.Models
         public int DonationOrBitsVipRequests { get; set; }
         public int ReceivedGiftVipRequests { get; set; }
         public int TokenVipRequests { get; set; }
+        public int ChannelPointVipRequests { get; set; }
         public int TokenBytes { get; set; }
         public int TotalBitsDropped { get; set; }
         public int TotalDonated { get; set; }

@@ -6,6 +6,8 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
+#nullable disable
+
 namespace CoreCodedChatbot.Database.Migrations
 {
     [DbContext(typeof(ChatbotContext))]
@@ -15,219 +17,229 @@ namespace CoreCodedChatbot.Database.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "3.1.3")
-                .HasAnnotation("Relational:MaxIdentifierLength", 128)
-                .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                .HasAnnotation("ProductVersion", "7.0.5")
+                .HasAnnotation("Relational:MaxIdentifierLength", 128);
+
+            SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
             modelBuilder.Entity("CoreCodedChatbot.Database.Context.Models.ChannelReward", b =>
                 {
                     b.Property<Guid>("ChannelRewardId")
-                        .HasColumnName("ChannelRewardId")
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("ChannelRewardId");
+
+                    b.Property<int>("CommandType")
+                        .HasColumnType("int")
+                        .HasColumnName("CommandType");
 
                     b.Property<string>("RewardDescription")
                         .IsRequired()
-                        .HasColumnName("RewardDescription")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("RewardDescription");
 
                     b.Property<string>("RewardTitle")
                         .IsRequired()
-                        .HasColumnName("RewardTitle")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("RewardTitle");
 
                     b.HasKey("ChannelRewardId");
 
-                    b.ToTable("ChannelRewards");
+                    b.ToTable("ChannelRewards", (string)null);
                 });
 
             modelBuilder.Entity("CoreCodedChatbot.Database.Context.Models.ChannelRewardRedemption", b =>
                 {
                     b.Property<Guid>("ChannelRewardRedemptionId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnName("ChannelRewardRedemptionId")
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("ChannelRewardRedemptionId");
 
                     b.Property<Guid>("ChannelRewardId")
-                        .HasColumnName("ChannelRewardId")
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("ChannelRewardId");
 
                     b.Property<bool>("Processed")
-                        .HasColumnName("Processed")
-                        .HasColumnType("bit");
+                        .HasColumnType("bit")
+                        .HasColumnName("Processed");
 
                     b.Property<DateTime>("RedeemedAt")
-                        .HasColumnName("RedeemedAt")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("datetime2")
+                        .HasColumnName("RedeemedAt");
 
                     b.Property<string>("RedeemedBy")
                         .IsRequired()
-                        .HasColumnName("RedeemedBy")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("RedeemedBy");
 
                     b.HasKey("ChannelRewardRedemptionId");
 
                     b.HasIndex("ChannelRewardId");
 
-                    b.ToTable("ChannelRewardRedemption");
+                    b.ToTable("ChannelRewardRedemption", (string)null);
                 });
 
             modelBuilder.Entity("CoreCodedChatbot.Database.Context.Models.Charter", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnName("Id")
                         .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnName("Id");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnName("Name")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("Name");
 
                     b.Property<bool>("Preferred")
                         .ValueGeneratedOnAdd()
-                        .HasColumnName("Preferred")
                         .HasColumnType("bit")
-                        .HasDefaultValue(false);
+                        .HasDefaultValue(false)
+                        .HasColumnName("Preferred");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Charters");
+                    b.ToTable("Charters", (string)null);
                 });
 
             modelBuilder.Entity("CoreCodedChatbot.Database.Context.Models.InfoCommand", b =>
                 {
                     b.Property<int>("InfoCommandId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnName("InfoCommandId")
                         .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnName("InfoCommandId");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("InfoCommandId"));
 
                     b.Property<string>("AddedByUser")
                         .IsRequired()
-                        .HasColumnName("Username")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("Username");
 
                     b.Property<string>("InfoHelpText")
                         .IsRequired()
-                        .HasColumnName("InfoHelpText")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("InfoHelpText");
 
                     b.Property<string>("InfoText")
                         .IsRequired()
-                        .HasColumnName("InfoText")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("InfoText");
 
                     b.HasKey("InfoCommandId");
 
-                    b.ToTable("InfoCommands");
+                    b.ToTable("InfoCommands", (string)null);
                 });
 
             modelBuilder.Entity("CoreCodedChatbot.Database.Context.Models.InfoCommandKeyword", b =>
                 {
                     b.Property<int>("InfoCommandId")
-                        .HasColumnName("InfoCommandId")
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnName("InfoCommandId");
 
                     b.Property<string>("InfoCommandKeywordText")
-                        .HasColumnName("InfoCommandKeywordText")
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("nvarchar(450)")
+                        .HasColumnName("InfoCommandKeywordText");
 
                     b.HasKey("InfoCommandId", "InfoCommandKeywordText");
 
-                    b.ToTable("InfoCommandKeywords");
+                    b.ToTable("InfoCommandKeywords", (string)null);
                 });
 
             modelBuilder.Entity("CoreCodedChatbot.Database.Context.Models.LogEntry", b =>
                 {
                     b.Property<int>("ID")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
 
                     b.Property<string>("AppDomain")
                         .IsRequired()
                         .ValueGeneratedOnAdd()
-                        .HasColumnName("AppDomain")
                         .HasColumnType("nvarchar(max)")
-                        .HasDefaultValue("");
+                        .HasDefaultValue("")
+                        .HasColumnName("AppDomain");
 
                     b.Property<string>("Callsite")
-                        .HasColumnName("Callsite")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("Callsite");
 
                     b.Property<string>("Exception")
-                        .HasColumnName("Exception")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("Exception");
 
                     b.Property<string>("Level")
                         .IsRequired()
-                        .HasColumnName("Level")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("Level");
 
                     b.Property<DateTime>("LoggedAt")
-                        .HasColumnName("LoggedAt")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("datetime2")
+                        .HasColumnName("LoggedAt");
 
                     b.Property<string>("Logger")
-                        .HasColumnName("Logger")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("Logger");
 
                     b.Property<string>("Message")
                         .IsRequired()
-                        .HasColumnName("Message")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("Message");
 
                     b.Property<string>("ProcessName")
                         .IsRequired()
-                        .HasColumnName("ProcessName")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("ProcessName");
 
                     b.Property<string>("StackTrace")
-                        .HasColumnName("StackTrace")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("StackTrace");
 
                     b.HasKey("ID");
 
-                    b.ToTable("LogEntry");
+                    b.ToTable("LogEntry", (string)null);
                 });
 
             modelBuilder.Entity("CoreCodedChatbot.Database.Context.Models.ModerationLog", b =>
                 {
                     b.Property<int>("ModerationLogId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnName("ModerationLogId")
                         .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnName("ModerationLogId");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ModerationLogId"));
 
                     b.Property<int>("Action")
-                        .HasColumnName("Action")
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnName("Action");
 
                     b.Property<DateTime>("ActionTakenTime")
-                        .HasColumnName("ActionTakenTime")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("datetime2")
+                        .HasColumnName("ActionTakenTime");
 
                     b.Property<string>("ExtraInformation")
-                        .HasColumnName("ExtraInformation")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("ExtraInformation");
 
                     b.Property<string>("Username")
                         .IsRequired()
-                        .HasColumnName("Username")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("Username");
 
                     b.HasKey("ModerationLogId");
 
-                    b.ToTable("ModerationLogs");
+                    b.ToTable("ModerationLogs", (string)null);
                 });
 
             modelBuilder.Entity("CoreCodedChatbot.Database.Context.Models.Quote", b =>
                 {
                     b.Property<int>("QuoteId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("QuoteId"));
 
                     b.Property<string>("CreatedBy")
                         .HasColumnType("nvarchar(max)");
@@ -253,9 +265,10 @@ namespace CoreCodedChatbot.Database.Migrations
                 {
                     b.Property<int>("SearchSynonymRequestId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnName("SearchSynonymRequestId")
                         .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnName("SearchSynonymRequestId");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("SearchSynonymRequestId"));
 
                     b.Property<string>("SynonymRequest")
                         .IsRequired()
@@ -267,161 +280,166 @@ namespace CoreCodedChatbot.Database.Migrations
 
                     b.HasKey("SearchSynonymRequestId");
 
-                    b.ToTable("SearchSynonymRequests");
+                    b.ToTable("SearchSynonymRequests", (string)null);
                 });
 
             modelBuilder.Entity("CoreCodedChatbot.Database.Context.Models.Setting", b =>
                 {
                     b.Property<int>("SettingId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnName("SettingId")
                         .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnName("SettingId");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("SettingId"));
 
                     b.Property<string>("SettingName")
                         .IsRequired()
-                        .HasColumnName("SettingName")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("SettingName");
 
                     b.Property<string>("SettingValue")
                         .IsRequired()
-                        .HasColumnName("SettingValue")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("SettingValue");
 
                     b.HasKey("SettingId");
 
-                    b.ToTable("Settings");
+                    b.ToTable("Settings", (string)null);
                 });
 
             modelBuilder.Entity("CoreCodedChatbot.Database.Context.Models.Song", b =>
                 {
                     b.Property<int>("SongId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnName("SongId")
                         .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnName("SongId");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("SongId"));
 
                     b.Property<string>("AlbumName")
                         .IsRequired()
-                        .HasColumnName("AlbumName")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("AlbumName");
 
                     b.Property<int>("CFId")
-                        .HasColumnName("CFId")
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnName("CFId");
 
                     b.Property<string>("ChartedPaths")
                         .IsRequired()
-                        .HasColumnName("ChartedPaths")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("ChartedPaths");
 
                     b.Property<int>("CharterId")
-                        .HasColumnName("CharterId")
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnName("CharterId");
 
                     b.Property<bool>("IsOfficial")
-                        .HasColumnName("IsOfficial")
-                        .HasColumnType("bit");
+                        .HasColumnType("bit")
+                        .HasColumnName("IsOfficial");
 
                     b.Property<string>("SongArtist")
                         .IsRequired()
-                        .HasColumnName("SongArtist")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("SongArtist");
 
                     b.Property<string>("SongName")
                         .IsRequired()
-                        .HasColumnName("SongName")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("SongName");
 
                     b.Property<int>("TotalDownloads")
-                        .HasColumnName("TotalDownloads")
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnName("TotalDownloads");
 
                     b.Property<string>("Tuning")
                         .IsRequired()
-                        .HasColumnName("Tuning")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("Tuning");
 
                     b.Property<DateTime>("UpdatedDateTime")
-                        .HasColumnName("UpdatedDateTime")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("datetime2")
+                        .HasColumnName("UpdatedDateTime");
 
                     b.Property<DateTime>("UploadedDateTime")
-                        .HasColumnName("UploadedDateTime")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("datetime2")
+                        .HasColumnName("UploadedDateTime");
 
                     b.HasKey("SongId");
 
                     b.HasIndex("CharterId");
 
-                    b.ToTable("Songs");
+                    b.ToTable("Songs", (string)null);
                 });
 
             modelBuilder.Entity("CoreCodedChatbot.Database.Context.Models.SongGuessingRecord", b =>
                 {
                     b.Property<int>("SongGuessingRecordId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnName("SongGuessingRecordId")
                         .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnName("SongGuessingRecordId");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("SongGuessingRecordId"));
 
                     b.Property<decimal>("FinalPercentage")
-                        .HasColumnName("FinalPercentage")
-                        .HasColumnType("decimal(18,2)");
+                        .HasColumnType("decimal(18,2)")
+                        .HasColumnName("FinalPercentage");
 
                     b.Property<bool>("IsInProgress")
-                        .HasColumnName("IsInProgress")
-                        .HasColumnType("bit");
+                        .HasColumnType("bit")
+                        .HasColumnName("IsInProgress");
 
                     b.Property<string>("SongDetails")
                         .IsRequired()
-                        .HasColumnName("SongDetails")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("SongDetails");
 
                     b.Property<bool>("UsersCanGuess")
-                        .HasColumnName("UsersCanGuess")
-                        .HasColumnType("bit");
+                        .HasColumnType("bit")
+                        .HasColumnName("UsersCanGuess");
 
                     b.HasKey("SongGuessingRecordId");
 
-                    b.ToTable("SongGuessingRecord");
+                    b.ToTable("SongGuessingRecord", (string)null);
                 });
 
             modelBuilder.Entity("CoreCodedChatbot.Database.Context.Models.SongPercentageGuess", b =>
                 {
                     b.Property<int>("SongPercentageGuessId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnName("SongPercentageGuessId")
                         .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnName("SongPercentageGuessId");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("SongPercentageGuessId"));
 
                     b.Property<decimal>("Guess")
-                        .HasColumnName("Guess")
-                        .HasColumnType("decimal(18,2)");
+                        .HasColumnType("decimal(18,2)")
+                        .HasColumnName("Guess");
 
                     b.Property<int>("SongGuessingRecordId")
-                        .HasColumnName("SongGuessingRecordId")
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnName("SongGuessingRecordId");
 
                     b.Property<string>("Username")
                         .IsRequired()
-                        .HasColumnName("Username")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("Username");
 
                     b.HasKey("SongPercentageGuessId");
 
                     b.HasIndex("SongGuessingRecordId");
 
-                    b.ToTable("SongPercentageGuess");
+                    b.ToTable("SongPercentageGuess", (string)null);
                 });
 
             modelBuilder.Entity("CoreCodedChatbot.Database.Context.Models.SongRequest", b =>
                 {
                     b.Property<int>("SongRequestId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnName("SongRequestId")
                         .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnName("SongRequestId");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("SongRequestId"));
 
                     b.Property<bool>("InDrive")
                         .HasColumnType("bit");
@@ -437,13 +455,13 @@ namespace CoreCodedChatbot.Database.Migrations
 
                     b.Property<string>("RequestUsername")
                         .IsRequired()
-                        .HasColumnName("RequestUsername")
+                        .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)")
-                        .HasMaxLength(255);
+                        .HasColumnName("RequestUsername");
 
                     b.Property<int?>("SongId")
-                        .HasColumnName("SongId")
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnName("SongId");
 
                     b.Property<DateTime?>("SuperVipRequestTime")
                         .HasColumnType("datetime2");
@@ -455,15 +473,16 @@ namespace CoreCodedChatbot.Database.Migrations
 
                     b.HasIndex("SongId");
 
-                    b.ToTable("SongRequests");
+                    b.ToTable("SongRequests", (string)null);
                 });
 
             modelBuilder.Entity("CoreCodedChatbot.Database.Context.Models.SongUrlVersion", b =>
                 {
                     b.Property<int>("SongUrlVersionId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("SongUrlVersionId"));
 
                     b.Property<int>("SongId")
                         .HasColumnType("int");
@@ -485,73 +504,80 @@ namespace CoreCodedChatbot.Database.Migrations
                 {
                     b.Property<int>("StreamStatusId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnName("StreamStatusId")
                         .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnName("StreamStatusId");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("StreamStatusId"));
 
                     b.Property<string>("BroadcasterUsername")
                         .IsRequired()
-                        .HasColumnName("BroadcasterUsername")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("BroadcasterUsername");
 
                     b.Property<bool>("IsOnline")
-                        .HasColumnName("IsOnline")
-                        .HasColumnType("bit");
+                        .HasColumnType("bit")
+                        .HasColumnName("IsOnline");
 
                     b.HasKey("StreamStatusId");
 
-                    b.ToTable("StreamStatuses");
+                    b.ToTable("StreamStatuses", (string)null);
                 });
 
             modelBuilder.Entity("CoreCodedChatbot.Database.Context.Models.User", b =>
                 {
                     b.Property<string>("Username")
-                        .HasColumnName("Username")
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("nvarchar(450)")
+                        .HasColumnName("Username");
+
+                    b.Property<int>("ChannelPointVipRequests")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasDefaultValue(0)
+                        .HasColumnName("ChannelPointVipRequests");
 
                     b.Property<int>("DonationOrBitsVipRequests")
-                        .HasColumnName("DonationOrBitsVipRequests")
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnName("DonationOrBitsVipRequests");
 
                     b.Property<int>("FollowVipRequest")
-                        .HasColumnName("FollowVipRequest")
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnName("FollowVipRequest");
 
                     b.Property<int>("ModGivenVipRequests")
-                        .HasColumnName("ModGivenVipRequests")
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnName("ModGivenVipRequests");
 
                     b.Property<int>("ReceivedGiftVipRequests")
                         .ValueGeneratedOnAdd()
-                        .HasColumnName("ReceivedGiftVipRequests")
                         .HasColumnType("int")
-                        .HasDefaultValue(0);
+                        .HasDefaultValue(0)
+                        .HasColumnName("ReceivedGiftVipRequests");
 
                     b.Property<int>("SentGiftVipRequests")
                         .ValueGeneratedOnAdd()
-                        .HasColumnName("SendgiftVipRequests")
                         .HasColumnType("int")
-                        .HasDefaultValue(0);
+                        .HasDefaultValue(0)
+                        .HasColumnName("SendgiftVipRequests");
 
                     b.Property<int>("SubVipRequests")
-                        .HasColumnName("SubVipRequests")
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnName("SubVipRequests");
 
                     b.Property<int>("Tier2Vips")
                         .ValueGeneratedOnAdd()
-                        .HasColumnName("Tier2Vips")
                         .HasColumnType("int")
-                        .HasDefaultValue(0);
+                        .HasDefaultValue(0)
+                        .HasColumnName("Tier2Vips");
 
                     b.Property<int>("Tier3Vips")
                         .ValueGeneratedOnAdd()
-                        .HasColumnName("Tier3Vips")
                         .HasColumnType("int")
-                        .HasDefaultValue(0);
+                        .HasDefaultValue(0)
+                        .HasColumnName("Tier3Vips");
 
                     b.Property<DateTime>("TimeLastInChat")
-                        .HasColumnName("TimeLastInChat")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("datetime2")
+                        .HasColumnName("TimeLastInChat");
 
                     b.Property<int>("TokenBytes")
                         .HasColumnType("int");
@@ -560,30 +586,30 @@ namespace CoreCodedChatbot.Database.Migrations
                         .HasColumnType("int");
 
                     b.Property<int>("TotalBitsDropped")
-                        .HasColumnName("TotalBitsDropped")
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnName("TotalBitsDropped");
 
                     b.Property<int>("TotalDonated")
-                        .HasColumnName("TotalDonated")
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnName("TotalDonated");
 
                     b.Property<int>("UsedSuperVipRequests")
                         .ValueGeneratedOnAdd()
-                        .HasColumnName("UsedSuperVipRequests")
                         .HasColumnType("int")
-                        .HasDefaultValue(0);
+                        .HasDefaultValue(0)
+                        .HasColumnName("UsedSuperVipRequests");
 
                     b.Property<int>("UsedVipRequests")
-                        .HasColumnName("UsedVipRequests")
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnName("UsedVipRequests");
 
                     b.Property<string>("_clientIds")
-                        .HasColumnName("ClientIds")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("ClientIds");
 
                     b.HasKey("Username");
 
-                    b.ToTable("Users");
+                    b.ToTable("Users", (string)null);
                 });
 
             modelBuilder.Entity("CoreCodedChatbot.Database.Context.Models.ChannelRewardRedemption", b =>
@@ -593,6 +619,8 @@ namespace CoreCodedChatbot.Database.Migrations
                         .HasForeignKey("ChannelRewardId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Reward");
                 });
 
             modelBuilder.Entity("CoreCodedChatbot.Database.Context.Models.InfoCommandKeyword", b =>
@@ -602,6 +630,8 @@ namespace CoreCodedChatbot.Database.Migrations
                         .HasForeignKey("InfoCommandId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("InfoCommand");
                 });
 
             modelBuilder.Entity("CoreCodedChatbot.Database.Context.Models.Song", b =>
@@ -611,6 +641,8 @@ namespace CoreCodedChatbot.Database.Migrations
                         .HasForeignKey("CharterId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Charter");
                 });
 
             modelBuilder.Entity("CoreCodedChatbot.Database.Context.Models.SongPercentageGuess", b =>
@@ -620,6 +652,8 @@ namespace CoreCodedChatbot.Database.Migrations
                         .HasForeignKey("SongGuessingRecordId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("SongGuessingRecord");
                 });
 
             modelBuilder.Entity("CoreCodedChatbot.Database.Context.Models.SongRequest", b =>
@@ -627,6 +661,8 @@ namespace CoreCodedChatbot.Database.Migrations
                     b.HasOne("CoreCodedChatbot.Database.Context.Models.Song", "Song")
                         .WithMany("SongRequests")
                         .HasForeignKey("SongId");
+
+                    b.Navigation("Song");
                 });
 
             modelBuilder.Entity("CoreCodedChatbot.Database.Context.Models.SongUrlVersion", b =>
@@ -636,6 +672,35 @@ namespace CoreCodedChatbot.Database.Migrations
                         .HasForeignKey("SongId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Song");
+                });
+
+            modelBuilder.Entity("CoreCodedChatbot.Database.Context.Models.ChannelReward", b =>
+                {
+                    b.Navigation("Redemptions");
+                });
+
+            modelBuilder.Entity("CoreCodedChatbot.Database.Context.Models.Charter", b =>
+                {
+                    b.Navigation("Songs");
+                });
+
+            modelBuilder.Entity("CoreCodedChatbot.Database.Context.Models.InfoCommand", b =>
+                {
+                    b.Navigation("InfoCommandKeywords");
+                });
+
+            modelBuilder.Entity("CoreCodedChatbot.Database.Context.Models.Song", b =>
+                {
+                    b.Navigation("SongRequests");
+
+                    b.Navigation("Urls");
+                });
+
+            modelBuilder.Entity("CoreCodedChatbot.Database.Context.Models.SongGuessingRecord", b =>
+                {
+                    b.Navigation("SongPercentageGuesses");
                 });
 #pragma warning restore 612, 618
         }
