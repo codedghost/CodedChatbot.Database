@@ -4,7 +4,6 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using CoreCodedChatbot.Database.Context.Enums;
 using CoreCodedChatbot.Database.Context.Interfaces;
-using Microsoft.VisualBasic;
 
 namespace CoreCodedChatbot.Database.Context.Models
 {

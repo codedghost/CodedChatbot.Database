@@ -1,5 +1,6 @@
 ﻿using System;
-
+using System.Threading;
+using System.Threading.Tasks;
 using CoreCodedChatbot.Database.Context.Models;
 
 using Microsoft.EntityFrameworkCore;
@@ -27,6 +28,8 @@ namespace CoreCodedChatbot.Database.Context.Interfaces
         DbSet<Charter> Charters { get; set; }
 
         int SaveChanges();
+
+        Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);
 
         EntityEntry<TEntity> Remove<TEntity>(TEntity entity)
             where TEntity : class;
