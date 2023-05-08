@@ -1,4 +1,6 @@
-﻿namespace CoreCodedChatbot.Database.Context.Interfaces
+﻿using Microsoft.EntityFrameworkCore;
+
+namespace CoreCodedChatbot.Database.Context.Interfaces
 {
     public interface IChatbotContextFactory
     {

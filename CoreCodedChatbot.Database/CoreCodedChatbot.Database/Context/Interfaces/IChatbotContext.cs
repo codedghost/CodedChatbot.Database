@@ -30,5 +30,7 @@ namespace CoreCodedChatbot.Database.Context.Interfaces
 
         EntityEntry<TEntity> Remove<TEntity>(TEntity entity)
             where TEntity : class;
+
+        DbSet<TEntity> Set<TEntity>() where TEntity : class;
     }
 }
