@@ -11,7 +11,7 @@ namespace CoreCodedChatbot.Database.Context.Models.Mapping
 
             builder.Property(t => t.SongRequestId).HasColumnName("SongRequestId").IsRequired();
             builder.Property(t => t.SongId).HasColumnName("SongId");
-            builder.Property(t => t.RequestUsername).HasColumnName("RequestUsername").HasMaxLength(255).IsRequired();
+            builder.Property(t => t.Username).HasColumnName("RequestUsername").HasMaxLength(255).IsRequired();
 
             builder.HasOne(t => t.Song).WithMany(o => o.SongRequests).HasForeignKey(k => k.SongId);
         }

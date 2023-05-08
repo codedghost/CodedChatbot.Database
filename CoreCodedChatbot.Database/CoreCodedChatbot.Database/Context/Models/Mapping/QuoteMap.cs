@@ -14,7 +14,7 @@ namespace CoreCodedChatbot.Database.Context.Models.Mapping
             builder.Property(t => t.QuoteId).HasColumnName("QuoteId").IsRequired();
             builder.Property(t => t.QuoteText).HasColumnName("QuoteText").IsRequired();
             builder.Property(t => t.LastEdited).HasColumnName("LastEdited").IsRequired();
-            builder.Property(t => t.CreatedBy).HasColumnName("CreatedBy").IsRequired();
+            builder.Property(t => t.Username).HasColumnName("CreatedBy").IsRequired();
             builder.Property(t => t.Enabled).HasColumnName("Enabled").IsRequired();
             builder.Property(t => t.LastEditedBy).HasColumnName("LastEditedBy");
         }

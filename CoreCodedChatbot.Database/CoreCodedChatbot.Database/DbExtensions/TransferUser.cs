@@ -32,11 +32,11 @@ namespace CoreCodedChatbot.Database.DbExtensions
 
         private static void TransferQuotes(IChatbotContext context, string oldUsername, string newUsername)
         {
-            var quotes = context.Quotes.Where(q => q.CreatedBy == oldUsername);
+            var quotes = context.Quotes.Where(q => q.Username == oldUsername);
 
             foreach (var quote in quotes)
             {
-                quote.CreatedBy = newUsername;
+                quote.Username = newUsername;
             }
         }
 
@@ -62,21 +62,21 @@ namespace CoreCodedChatbot.Database.DbExtensions
 
         private static void TransferSongRequests(IChatbotContext context, string oldUsername, string newUsername)
         {
-            var songRequests = context.SongRequests.Where(sr => sr.RequestUsername == oldUsername);
+            var songRequests = context.SongRequests.Where(sr => sr.Username == oldUsername);
 
             foreach (var songRequest in songRequests)
             {
-                songRequest.RequestUsername = newUsername;
+                songRequest.Username = newUsername;
             }
         }
 
         private static void TransferChatCommands(IChatbotContext context, string oldUsername, string newUsername)
         {
-            var commands = context.InfoCommands.Where(ic => ic.AddedByUser == oldUsername);
+            var commands = context.InfoCommands.Where(ic => ic.Username == oldUsername);
 
             foreach (var command in commands)
             {
-                command.AddedByUser = newUsername;
+                command.Username = newUsername;
             }
         }
 

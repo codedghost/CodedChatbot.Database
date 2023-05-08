@@ -1,9 +1,10 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using CoreCodedChatbot.Database.Context.Interfaces;
 
 namespace CoreCodedChatbot.Database.Context.Models
 {
-    public class SongPercentageGuess
+    public class SongPercentageGuess : IEntityWithUsername
     {
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int SongPercentageGuessId { get; set; }

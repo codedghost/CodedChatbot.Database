@@ -3,11 +3,12 @@ using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using CoreCodedChatbot.Database.Context.Interfaces;
 using Newtonsoft.Json;
 
 namespace CoreCodedChatbot.Database.Context.Models
 {
-    public class User
+    public class User : IEntityWithUsername
     {
         [Key, DatabaseGenerated(DatabaseGeneratedOption.None)]
         public string Username { get; set; }

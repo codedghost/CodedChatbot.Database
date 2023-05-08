@@ -1,8 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
+using CoreCodedChatbot.Database.Context.Interfaces;
 
 namespace CoreCodedChatbot.Database.Context.Models
 {
-    public class SearchSynonymRequest
+    public class SearchSynonymRequest : IEntityWithUsername
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int SearchSynonymRequestId { get; set; }

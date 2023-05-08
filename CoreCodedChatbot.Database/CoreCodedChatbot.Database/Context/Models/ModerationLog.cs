@@ -2,10 +2,11 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using CoreCodedChatbot.Database.Context.Enums;
+using CoreCodedChatbot.Database.Context.Interfaces;
 
 namespace CoreCodedChatbot.Database.Context.Models
 {
-    public class ModerationLog
+    public class ModerationLog : IEntityWithUsername
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]

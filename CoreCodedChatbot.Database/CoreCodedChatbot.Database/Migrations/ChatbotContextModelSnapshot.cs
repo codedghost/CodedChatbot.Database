@@ -66,7 +66,7 @@ namespace CoreCodedChatbot.Database.Migrations
                         .HasColumnType("datetime2")
                         .HasColumnName("RedeemedAt");
 
-                    b.Property<string>("RedeemedBy")
+                    b.Property<string>("Username")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)")
                         .HasColumnName("RedeemedBy");
@@ -112,11 +112,6 @@ namespace CoreCodedChatbot.Database.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("InfoCommandId"));
 
-                    b.Property<string>("AddedByUser")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)")
-                        .HasColumnName("Username");
-
                     b.Property<string>("InfoHelpText")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)")
@@ -126,6 +121,11 @@ namespace CoreCodedChatbot.Database.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)")
                         .HasColumnName("InfoText");
+
+                    b.Property<string>("Username")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("Username");
 
                     b.HasKey("InfoCommandId");
 
@@ -241,9 +241,6 @@ namespace CoreCodedChatbot.Database.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("QuoteId"));
 
-                    b.Property<string>("CreatedBy")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<bool>("Enabled")
                         .HasColumnType("bit");
 
@@ -254,6 +251,9 @@ namespace CoreCodedChatbot.Database.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("QuoteText")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Username")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("QuoteId");
@@ -453,18 +453,18 @@ namespace CoreCodedChatbot.Database.Migrations
                     b.Property<DateTime>("RequestTime")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("RequestUsername")
-                        .IsRequired()
-                        .HasMaxLength(255)
-                        .HasColumnType("nvarchar(255)")
-                        .HasColumnName("RequestUsername");
-
                     b.Property<int?>("SongId")
                         .HasColumnType("int")
                         .HasColumnName("SongId");
 
                     b.Property<DateTime?>("SuperVipRequestTime")
                         .HasColumnType("datetime2");
+
+                    b.Property<string>("Username")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)")
+                        .HasColumnName("RequestUsername");
 
                     b.Property<DateTime?>("VipRequestTime")
                         .HasColumnType("datetime2");
