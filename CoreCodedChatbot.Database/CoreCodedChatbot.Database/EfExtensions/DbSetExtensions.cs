@@ -2,6 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Reflection;
 
 namespace Microsoft.EntityFrameworkCore
 {
@@ -26,6 +27,11 @@ namespace Microsoft.EntityFrameworkCore
             return source.GetOrderByQuery(orderBy, "OrderByDescending");
         }
 
+        public static IQueryable<T> FilterBy<T>(this IQueryable<T> source, string filterBy, object value)
+        {
+            return source.GetFilterByQuery(filterBy, value);
+        }
+
         private static IQueryable<T> GetOrderByQuery<T>(this IQueryable<T> source, string orderBy, string methodName)
         {
             var sourceType = typeof(T);
@@ -38,6 +44,21 @@ namespace Microsoft.EntityFrameworkCore
                 orderByExpression);
 
             return source.Provider.CreateQuery<T>(resultExpression);
+        }
+
+        private static IQueryable<T> GetFilterByQuery<T>(this IQueryable<T> source, string filterBy, object value)
+        {
+            var sourceType = typeof(T);
+            var property = sourceType.GetProperty(filterBy);
+            var parameterExpression = Expression.Parameter(sourceType, "x");
+            var valueExpression = Expression.Constant(value, value.GetType());
+            var getPropertyExpression = Expression.MakeMemberAccess(parameterExpression, property);
+
+            var expression = Expression.Equal(getPropertyExpression, valueExpression);
+
+            var filterByExpression = Expression.Lambda<Func<T, bool>>(expression, parameterExpression);
+
+            return source.Where(filterByExpression);
         }
     }
 }
