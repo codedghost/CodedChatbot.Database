@@ -9,11 +9,8 @@ namespace CoreCodedChatbot.Database.Context.Models.Mapping
         {
             builder.ToTable("Counters");
 
-            builder.HasKey(t => t.CounterId);
+            builder.HasKey(t => t.CounterName);
 
-            builder.Property(t => t.CounterId)
-                .HasColumnName("CounterId")
-                .IsRequired();
             builder.Property(t => t.CounterName)
                 .HasColumnName("CounterName")
                 .IsRequired();
