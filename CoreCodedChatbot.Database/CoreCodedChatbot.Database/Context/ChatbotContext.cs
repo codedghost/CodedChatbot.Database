@@ -48,6 +48,7 @@ namespace CoreCodedChatbot.Database.Context
         public DbSet<ChannelReward> ChannelRewards { get; set; }
         public DbSet<ChannelRewardRedemption> ChannelRewardRedemptions { get; set; }
         public DbSet<Charter> Charters { get; set; }
+        public DbSet<Counter> Counters { get; set; }
 
         private IConfigurationRoot ConfigRoot { get; set; }
 
@@ -88,6 +89,7 @@ namespace CoreCodedChatbot.Database.Context
             modelBuilder.AddConfiguration(new ChannelRewardMap());
             modelBuilder.AddConfiguration(new ChannelRewardRedemptionMap());
             modelBuilder.AddConfiguration(new CharterMap());
+            modelBuilder.AddConfiguration(new CounterMap());
         }
     }
 }

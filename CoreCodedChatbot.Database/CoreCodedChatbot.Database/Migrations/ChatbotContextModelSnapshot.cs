@@ -103,6 +103,31 @@ namespace CoreCodedChatbot.Database.Migrations
                     b.ToTable("Charters", (string)null);
                 });
 
+            modelBuilder.Entity("CoreCodedChatbot.Database.Context.Models.Counter", b =>
+                {
+                    b.Property<Guid>("CounterId")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("CounterId");
+
+                    b.Property<string>("CounterName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("CounterName");
+
+                    b.Property<string>("CounterSuffix")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("CounterSuffix");
+
+                    b.Property<int>("CounterValue")
+                        .HasColumnType("int")
+                        .HasColumnName("CounterValue");
+
+                    b.HasKey("CounterId");
+
+                    b.ToTable("Counters", (string)null);
+                });
+
             modelBuilder.Entity("CoreCodedChatbot.Database.Context.Models.InfoCommand", b =>
                 {
                     b.Property<int>("InfoCommandId")
