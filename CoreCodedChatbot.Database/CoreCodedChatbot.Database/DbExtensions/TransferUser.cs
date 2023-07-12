@@ -117,6 +117,9 @@ namespace CoreCodedChatbot.Database.DbExtensions
 
             newUsername.TotalDonated += oldUsername.TotalDonated;
             oldUsername.TotalDonated = 0;
+
+            newUsername.ChannelPointVipRequests += oldUsername.ChannelPointVipRequests;
+            oldUsername.ChannelPointVipRequests = 0;
         }
 
         private static void LogTransfer(IChatbotContext context, string moderatorUsername, string oldUsername, string newUsername)
