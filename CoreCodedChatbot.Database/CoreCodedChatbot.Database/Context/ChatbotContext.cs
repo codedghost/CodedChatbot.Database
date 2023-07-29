@@ -56,7 +56,7 @@ namespace CoreCodedChatbot.Database.Context
         {
             var builder = new ConfigurationBuilder()
                 .SetBasePath(AppDomain.CurrentDomain.BaseDirectory)
-                .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
+                .AddJsonFile("appsettings.json", optional: true, reloadOnChange: false);
 
             ConfigRoot = builder.Build();
 
