@@ -623,6 +623,12 @@ namespace CoreCodedChatbot.Database.Migrations
                         .HasColumnType("int")
                         .HasColumnName("UsedVipRequests");
 
+                    b.Property<int>("WatchTime")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasDefaultValue(0)
+                        .HasColumnName("WatchTime");
+
                     b.Property<string>("_clientIds")
                         .HasColumnType("nvarchar(max)")
                         .HasColumnName("ClientIds");
