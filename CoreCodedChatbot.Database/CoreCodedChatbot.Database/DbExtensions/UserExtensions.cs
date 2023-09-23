@@ -1,13 +1,84 @@
-﻿using System;
-using System.Linq;
-using CoreCodedChatbot.Database.Context.Enums;
+﻿using CoreCodedChatbot.Database.Context.Enums;
 using CoreCodedChatbot.Database.Context.Interfaces;
 using CoreCodedChatbot.Database.Context.Models;
+using Microsoft.EntityFrameworkCore;
+using System;
+using System.Linq;
 
 namespace CoreCodedChatbot.Database.DbExtensions
 {
-    public static class TransferUserExtension
+    public static class UserExtensions
     {
+        public static TimeSpan GetTotalWatchTime(this IChatbotContext context, string username)
+        {
+            var user = context.Users.Find(username);
+
+            if (user == null)
+            {
+                return TimeSpan.Zero;
+            }
+
+            var minutes = user.WatchTime;
+
+            return TimeSpan.FromMinutes(minutes);
+        }
+
+        public static User GetOrCreateUser(this IChatbotContext context, string username,
+            bool deferSaveIfCreate = false)
+        {
+            return Get(context, username) ?? Create(context, username, deferSaveIfCreate);
+        }
+
+        private static User Get(IChatbotContext context, string username)
+        {
+            var user = context.Users.SingleOrDefault(u => u.Username.ToLower() == username.ToLower());
+
+            return user;
+        }
+
+        private static User Create(IChatbotContext context, string username, bool deferSave)
+        {
+            var user = new User
+            {
+                Username = username,
+                UsedVipRequests = 0,
+                UsedSuperVipRequests = 0,
+                SentGiftVipRequests = 0,
+                ModGivenVipRequests = 0,
+                FollowVipRequest = 0,
+                SubVipRequests = 0,
+                DonationOrBitsVipRequests = 0,
+                ReceivedGiftVipRequests = 0,
+                TokenVipRequests = 0,
+                TokenBytes = 0,
+                TotalBitsDropped = 0,
+                TotalDonated = 0,
+                TimeLastInChat = DateTime.UtcNow
+            };
+
+            context.Users.Add(user);
+
+            if (!deferSave)
+                context.SaveChanges();
+
+            return user;
+        }
+
+        public static void RemoveClientId(this DbSet<User> users, string hubType, string clientId)
+        {
+            var user = users.SingleOrDefault(u => u._clientIds.Contains(clientId));
+
+            if (user == null) return;
+
+            var clientIds = user.GetClientIdsDictionary();
+            if (clientIds.Any() && clientIds.ContainsKey(hubType))
+            {
+                clientIds[hubType].Remove(clientId);
+            }
+
+            user.UpdateClientIdsDictionary(clientIds);
+        }
+
         public static void TransferUser(this IChatbotContext context, string moderatorUsername, string oldUsername,
             string newUsername)
         {
@@ -40,7 +111,8 @@ namespace CoreCodedChatbot.Database.DbExtensions
             }
         }
 
-        private static void TransferSearchSynonymRequests(IChatbotContext context, string oldUsername, string newUsername)
+        private static void TransferSearchSynonymRequests(IChatbotContext context, string oldUsername,
+            string newUsername)
         {
             var searchSynonymRequests = context.SearchSynonymRequests.Where(ssr => ssr.Username == oldUsername);
 
@@ -122,7 +194,8 @@ namespace CoreCodedChatbot.Database.DbExtensions
             oldUsername.ChannelPointVipRequests = 0;
         }
 
-        private static void LogTransfer(IChatbotContext context, string moderatorUsername, string oldUsername, string newUsername)
+        private static void LogTransfer(IChatbotContext context, string moderatorUsername, string oldUsername,
+            string newUsername)
         {
             var logRecord = new ModerationLog
             {

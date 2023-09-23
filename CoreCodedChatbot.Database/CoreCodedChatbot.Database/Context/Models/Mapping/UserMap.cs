@@ -31,6 +31,9 @@ namespace CoreCodedChatbot.Database.Context.Models.Mapping
                 .HasDefaultValue(0);
             builder.Property(t => t.ChannelPointVipRequests).HasColumnName("ChannelPointVipRequests").IsRequired()
                 .HasDefaultValue(0);
+            builder.Property(t => t.WatchTime).HasColumnName("WatchTime")
+                .IsRequired()
+                .HasDefaultValue(0);
 
             builder.Property(t => t.TotalBitsDropped).HasColumnName("TotalBitsDropped");
             builder.Property(t => t.TotalDonated).HasColumnName("TotalDonated");

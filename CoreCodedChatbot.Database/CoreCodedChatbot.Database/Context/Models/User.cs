@@ -26,6 +26,7 @@ namespace CoreCodedChatbot.Database.Context.Models
         public int TokenBytes { get; set; }
         public int TotalBitsDropped { get; set; }
         public int TotalDonated { get; set; }
+        public int WatchTime { get; set; }
         public DateTime TimeLastInChat { get; set; }
         internal string _clientIds { get; set; }
 
