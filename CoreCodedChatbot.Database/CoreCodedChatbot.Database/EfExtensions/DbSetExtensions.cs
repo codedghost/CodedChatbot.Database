@@ -50,8 +50,11 @@ namespace Microsoft.EntityFrameworkCore
         {
             var sourceType = typeof(T);
             var property = sourceType.GetProperty(filterBy);
+
+            var castValue = Convert.ChangeType(value, property.PropertyType);
+
             var parameterExpression = Expression.Parameter(sourceType, "x");
-            var valueExpression = Expression.Constant(value, value.GetType());
+            var valueExpression = Expression.Constant(castValue, castValue.GetType());
             var getPropertyExpression = Expression.MakeMemberAccess(parameterExpression, property);
 
             var expression = Expression.Equal(getPropertyExpression, valueExpression);
