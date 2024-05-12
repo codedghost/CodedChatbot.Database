@@ -109,6 +109,10 @@ namespace CoreCodedChatbot.Database.Migrations
                         .HasColumnType("nvarchar(450)")
                         .HasColumnName("CounterName");
 
+                    b.Property<bool>("Archived")
+                        .HasColumnType("bit")
+                        .HasColumnName("Archived");
+
                     b.Property<string>("CounterSuffix")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)")

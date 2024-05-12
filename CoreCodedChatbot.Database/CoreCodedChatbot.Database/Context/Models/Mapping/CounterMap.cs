@@ -22,6 +22,10 @@ namespace CoreCodedChatbot.Database.Context.Models.Mapping
             builder.Property(t => t.CounterValue)
                 .HasColumnName("CounterValue")
                 .IsRequired();
+
+            builder.Property(t => t.Archived)
+                .HasColumnName("Archived")
+                .IsRequired();
         }
     }
 }
