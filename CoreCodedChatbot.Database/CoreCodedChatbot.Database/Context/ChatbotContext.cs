@@ -51,6 +51,7 @@ namespace CoreCodedChatbot.Database.Context
         public DbSet<Counter> Counters { get; set; }
         public DbSet<YlylSession> YlylSessions { get; set; }
         public DbSet<YlylSubmission> YlylSubmissions { get; set; }
+        public DbSet<YlylEntry> YlylEntries { get; set; }
         public DbSet<YlylReward> YlylRewards { get; set; }
 
         private IConfigurationRoot ConfigRoot { get; set; }
@@ -95,6 +96,7 @@ namespace CoreCodedChatbot.Database.Context
             modelBuilder.AddConfiguration(new CounterMap());
             modelBuilder.AddConfiguration(new YlylSessionMap());
             modelBuilder.AddConfiguration(new YlylSubmissionMap());
+            modelBuilder.AddConfiguration(new YlylEntryMap());
             modelBuilder.AddConfiguration(new YlylRewardMap());
         }
     }

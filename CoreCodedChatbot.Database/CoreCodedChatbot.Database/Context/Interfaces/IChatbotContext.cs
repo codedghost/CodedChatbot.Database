@@ -29,6 +29,7 @@ namespace CoreCodedChatbot.Database.Context.Interfaces
         DbSet<Counter> Counters { get; set; }
         DbSet<YlylSession> YlylSessions { get; set; }
         DbSet<YlylSubmission> YlylSubmissions { get; set; }
+        DbSet<YlylEntry> YlylEntries { get; set; }
         DbSet<YlylReward> YlylRewards { get; set; }
 
         int SaveChanges();

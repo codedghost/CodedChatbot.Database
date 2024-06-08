@@ -15,10 +15,10 @@ public class YlylRewardMap : EntityTypeConfiguration<YlylReward>
         builder.Property(y => y.RewardId).HasColumnName("RewardId").IsRequired();
         builder.Property(y => y.IsRedeemed).HasColumnName("IsRedeemed").HasDefaultValue(false).IsRequired();
         builder.Property(y => y.RewardValue).HasColumnName("RewardValue").IsRequired();
-        builder.Property(y => y.YlylSubmissionId).HasColumnName("YlylSubmissionId");
+        builder.Property(y => y.YlylEntryId).HasColumnName("YlylEntryId");
 
-        builder.HasOne(y => y.Submission)
+        builder.HasOne(y => y.Entry)
             .WithOne(y => y.Reward)
-            .HasForeignKey<YlylReward>(yr => yr.YlylSubmissionId);
+            .HasForeignKey<YlylReward>(yr => yr.YlylEntryId);
     }
 }

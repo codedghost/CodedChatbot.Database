@@ -642,6 +642,46 @@ namespace CoreCodedChatbot.Database.Migrations
                     b.ToTable("Users", (string)null);
                 });
 
+            modelBuilder.Entity("CoreCodedChatbot.Database.Context.Models.YlylEntry", b =>
+                {
+                    b.Property<int>("EntryId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("EntryId");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("EntryId"));
+
+                    b.Property<bool>("HasReceivedReward")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(false)
+                        .HasColumnName("HasReceivedReward");
+
+                    b.Property<bool>("HasWon")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(false)
+                        .HasColumnName("HasWon");
+
+                    b.Property<bool>("IsImage")
+                        .HasColumnType("bit")
+                        .HasColumnName("IsImage");
+
+                    b.Property<int?>("YlylRewardId")
+                        .HasColumnType("int")
+                        .HasColumnName("YlylRewardId");
+
+                    b.Property<int>("YlylSubmissionId")
+                        .HasColumnType("int")
+                        .HasColumnName("YlylSubmissionId");
+
+                    b.HasKey("EntryId");
+
+                    b.HasIndex("YlylSubmissionId");
+
+                    b.ToTable("YlylEntries", (string)null);
+                });
+
             modelBuilder.Entity("CoreCodedChatbot.Database.Context.Models.YlylReward", b =>
                 {
                     b.Property<int>("RewardId")
@@ -662,15 +702,15 @@ namespace CoreCodedChatbot.Database.Migrations
                         .HasColumnType("nvarchar(max)")
                         .HasColumnName("RewardValue");
 
-                    b.Property<int?>("YlylSubmissionId")
+                    b.Property<int?>("YlylEntryId")
                         .HasColumnType("int")
-                        .HasColumnName("YlylSubmissionId");
+                        .HasColumnName("YlylEntryId");
 
                     b.HasKey("RewardId");
 
-                    b.HasIndex("YlylSubmissionId")
+                    b.HasIndex("YlylEntryId")
                         .IsUnique()
-                        .HasFilter("[YlylSubmissionId] IS NOT NULL");
+                        .HasFilter("[YlylEntryId] IS NOT NULL");
 
                     b.ToTable("YlylRewards", (string)null);
                 });
@@ -714,22 +754,6 @@ namespace CoreCodedChatbot.Database.Migrations
                         .HasColumnType("decimal(20,0)")
                         .HasColumnName("ChannelId");
 
-                    b.Property<bool>("HasReceivedReward")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bit")
-                        .HasDefaultValue(false)
-                        .HasColumnName("HasReceivedReward");
-
-                    b.Property<bool>("HasWon")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bit")
-                        .HasDefaultValue(false)
-                        .HasColumnName("HasWon");
-
-                    b.Property<bool>("IsImage")
-                        .HasColumnType("bit")
-                        .HasColumnName("IsImage");
-
                     b.Property<decimal>("MessageId")
                         .HasColumnType("decimal(20,0)")
                         .HasColumnName("MessageId");
@@ -741,10 +765,6 @@ namespace CoreCodedChatbot.Database.Migrations
                     b.Property<DateTime>("SubmissionTime")
                         .HasColumnType("datetime2")
                         .HasColumnName("SubmissionTime");
-
-                    b.Property<int?>("YlylRewardId")
-                        .HasColumnType("int")
-                        .HasColumnName("YlylRewardId");
 
                     b.HasKey("SubmissionId");
 
@@ -817,13 +837,24 @@ namespace CoreCodedChatbot.Database.Migrations
                     b.Navigation("Song");
                 });
 
+            modelBuilder.Entity("CoreCodedChatbot.Database.Context.Models.YlylEntry", b =>
+                {
+                    b.HasOne("CoreCodedChatbot.Database.Context.Models.YlylSubmission", "YlylSubmission")
+                        .WithMany("YlylEntries")
+                        .HasForeignKey("YlylSubmissionId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("YlylSubmission");
+                });
+
             modelBuilder.Entity("CoreCodedChatbot.Database.Context.Models.YlylReward", b =>
                 {
-                    b.HasOne("CoreCodedChatbot.Database.Context.Models.YlylSubmission", "Submission")
+                    b.HasOne("CoreCodedChatbot.Database.Context.Models.YlylEntry", "Entry")
                         .WithOne("Reward")
-                        .HasForeignKey("CoreCodedChatbot.Database.Context.Models.YlylReward", "YlylSubmissionId");
+                        .HasForeignKey("CoreCodedChatbot.Database.Context.Models.YlylReward", "YlylEntryId");
 
-                    b.Navigation("Submission");
+                    b.Navigation("Entry");
                 });
 
             modelBuilder.Entity("CoreCodedChatbot.Database.Context.Models.YlylSubmission", b =>
@@ -864,6 +895,11 @@ namespace CoreCodedChatbot.Database.Migrations
                     b.Navigation("SongPercentageGuesses");
                 });
 
+            modelBuilder.Entity("CoreCodedChatbot.Database.Context.Models.YlylEntry", b =>
+                {
+                    b.Navigation("Reward");
+                });
+
             modelBuilder.Entity("CoreCodedChatbot.Database.Context.Models.YlylSession", b =>
                 {
                     b.Navigation("YlylSubmissions");
@@ -871,7 +907,7 @@ namespace CoreCodedChatbot.Database.Migrations
 
             modelBuilder.Entity("CoreCodedChatbot.Database.Context.Models.YlylSubmission", b =>
                 {
-                    b.Navigation("Reward");
+                    b.Navigation("YlylEntries");
                 });
 #pragma warning restore 612, 618
         }

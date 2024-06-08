@@ -9,8 +9,8 @@ namespace CoreCodedChatbot.Database.Context.Models
         public int RewardId { get; set; }
         public bool IsRedeemed { get; set; } = false;
         public string RewardValue { get; set; }
-        public int? YlylSubmissionId { get; set; }
+        public int? YlylEntryId { get; set; }
 
-        public virtual YlylSubmission Submission { get; set; }
+        public virtual YlylEntry Entry { get; set; }
     }
 }
