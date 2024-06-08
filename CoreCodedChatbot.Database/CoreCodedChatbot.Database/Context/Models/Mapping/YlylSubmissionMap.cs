@@ -16,10 +16,11 @@ public class YlylSubmissionMap : EntityTypeConfiguration<YlylSubmission>
         builder.Property(y => y.ChannelId).HasColumnName("ChannelId").IsRequired();
         builder.Property(y => y.MessageId).HasColumnName("MessageId").IsRequired();
         builder.Property(y => y.SubmissionTime).HasColumnName("SubmissionTime").IsRequired();
+        builder.Property(y => y.TotalImages).HasColumnName("TotalImages").HasDefaultValue(0);
+        builder.Property(y => y.TotalVideos).HasColumnName("TotalVideos").HasDefaultValue(0);
 
         builder.HasOne(y => y.Session)
             .WithMany(y => y.YlylSubmissions)
             .HasForeignKey(ys => ys.SessionId);
-
     }
 }

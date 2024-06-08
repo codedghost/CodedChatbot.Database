@@ -15,7 +15,5 @@ public class YlylSessionMap : EntityTypeConfiguration<YlylSession>
         builder.Property(y => y.IsActive).HasColumnName("IsActive").IsRequired();
         builder.Property(y => y.OpenedAt).HasColumnName("OpenedAt").IsRequired();
         builder.Property(y => y.ClosedAt).HasColumnName("ClosedAt");
-
-
     }
 }

@@ -13,6 +13,8 @@ public class YlylSubmission
     public ulong ChannelId { get; set; }
     public ulong MessageId { get; set; }
     public DateTime SubmissionTime { get; set; }
+    public int TotalImages { get; set; }
+    public int TotalVideos { get; set; }
 
     public virtual List<YlylEntry> YlylEntries { get; set; }
     public virtual YlylSession Session { get; set; }

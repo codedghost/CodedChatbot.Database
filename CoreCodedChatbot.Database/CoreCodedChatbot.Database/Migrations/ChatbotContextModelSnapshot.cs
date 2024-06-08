@@ -766,6 +766,18 @@ namespace CoreCodedChatbot.Database.Migrations
                         .HasColumnType("datetime2")
                         .HasColumnName("SubmissionTime");
 
+                    b.Property<int>("TotalImages")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasDefaultValue(0)
+                        .HasColumnName("TotalImages");
+
+                    b.Property<int>("TotalVideos")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasDefaultValue(0)
+                        .HasColumnName("TotalVideos");
+
                     b.HasKey("SubmissionId");
 
                     b.HasIndex("SessionId");
