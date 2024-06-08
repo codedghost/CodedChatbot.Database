@@ -642,6 +642,117 @@ namespace CoreCodedChatbot.Database.Migrations
                     b.ToTable("Users", (string)null);
                 });
 
+            modelBuilder.Entity("CoreCodedChatbot.Database.Context.Models.YlylReward", b =>
+                {
+                    b.Property<int>("RewardId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("RewardId");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("RewardId"));
+
+                    b.Property<bool>("IsRedeemed")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(false)
+                        .HasColumnName("IsRedeemed");
+
+                    b.Property<string>("RewardValue")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("RewardValue");
+
+                    b.Property<int?>("YlylSubmissionId")
+                        .HasColumnType("int")
+                        .HasColumnName("YlylSubmissionId");
+
+                    b.HasKey("RewardId");
+
+                    b.HasIndex("YlylSubmissionId")
+                        .IsUnique()
+                        .HasFilter("[YlylSubmissionId] IS NOT NULL");
+
+                    b.ToTable("YlylRewards", (string)null);
+                });
+
+            modelBuilder.Entity("CoreCodedChatbot.Database.Context.Models.YlylSession", b =>
+                {
+                    b.Property<int>("SessionId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("SessionId");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("SessionId"));
+
+                    b.Property<DateTime?>("ClosedAt")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("ClosedAt");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit")
+                        .HasColumnName("IsActive");
+
+                    b.Property<DateTime>("OpenedAt")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("OpenedAt");
+
+                    b.HasKey("SessionId");
+
+                    b.ToTable("YlylSessions", (string)null);
+                });
+
+            modelBuilder.Entity("CoreCodedChatbot.Database.Context.Models.YlylSubmission", b =>
+                {
+                    b.Property<int>("SubmissionId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("SubmissionId");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("SubmissionId"));
+
+                    b.Property<decimal>("ChannelId")
+                        .HasColumnType("decimal(20,0)")
+                        .HasColumnName("ChannelId");
+
+                    b.Property<bool>("HasReceivedReward")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(false)
+                        .HasColumnName("HasReceivedReward");
+
+                    b.Property<bool>("HasWon")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(false)
+                        .HasColumnName("HasWon");
+
+                    b.Property<bool>("IsImage")
+                        .HasColumnType("bit")
+                        .HasColumnName("IsImage");
+
+                    b.Property<decimal>("MessageId")
+                        .HasColumnType("decimal(20,0)")
+                        .HasColumnName("MessageId");
+
+                    b.Property<int>("SessionId")
+                        .HasColumnType("int")
+                        .HasColumnName("SessionId");
+
+                    b.Property<DateTime>("SubmissionTime")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("SubmissionTime");
+
+                    b.Property<int?>("YlylRewardId")
+                        .HasColumnType("int")
+                        .HasColumnName("YlylRewardId");
+
+                    b.HasKey("SubmissionId");
+
+                    b.HasIndex("SessionId");
+
+                    b.ToTable("YlylSubmissions", (string)null);
+                });
+
             modelBuilder.Entity("CoreCodedChatbot.Database.Context.Models.ChannelRewardRedemption", b =>
                 {
                     b.HasOne("CoreCodedChatbot.Database.Context.Models.ChannelReward", "Reward")
@@ -706,6 +817,26 @@ namespace CoreCodedChatbot.Database.Migrations
                     b.Navigation("Song");
                 });
 
+            modelBuilder.Entity("CoreCodedChatbot.Database.Context.Models.YlylReward", b =>
+                {
+                    b.HasOne("CoreCodedChatbot.Database.Context.Models.YlylSubmission", "Submission")
+                        .WithOne("Reward")
+                        .HasForeignKey("CoreCodedChatbot.Database.Context.Models.YlylReward", "YlylSubmissionId");
+
+                    b.Navigation("Submission");
+                });
+
+            modelBuilder.Entity("CoreCodedChatbot.Database.Context.Models.YlylSubmission", b =>
+                {
+                    b.HasOne("CoreCodedChatbot.Database.Context.Models.YlylSession", "Session")
+                        .WithMany("YlylSubmissions")
+                        .HasForeignKey("SessionId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Session");
+                });
+
             modelBuilder.Entity("CoreCodedChatbot.Database.Context.Models.ChannelReward", b =>
                 {
                     b.Navigation("Redemptions");
@@ -731,6 +862,16 @@ namespace CoreCodedChatbot.Database.Migrations
             modelBuilder.Entity("CoreCodedChatbot.Database.Context.Models.SongGuessingRecord", b =>
                 {
                     b.Navigation("SongPercentageGuesses");
+                });
+
+            modelBuilder.Entity("CoreCodedChatbot.Database.Context.Models.YlylSession", b =>
+                {
+                    b.Navigation("YlylSubmissions");
+                });
+
+            modelBuilder.Entity("CoreCodedChatbot.Database.Context.Models.YlylSubmission", b =>
+                {
+                    b.Navigation("Reward");
                 });
 #pragma warning restore 612, 618
         }
