@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
+using CoreCodedChatbot.Database.Context.Interfaces;
 
 namespace CoreCodedChatbot.Database.Context.Models;
 
-public class YlylSubmission
+public class YlylSubmission : IEntity
 {
     [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public int SubmissionId { get; set; }

@@ -3,10 +3,11 @@ using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
+using CoreCodedChatbot.Database.Context.Interfaces;
 
 namespace CoreCodedChatbot.Database.Context.Models;
 
-public class YlylSession
+public class YlylSession : IEntity
 {
     [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public int SessionId { get; set; }
