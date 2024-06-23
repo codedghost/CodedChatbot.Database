@@ -13,6 +13,7 @@ public class YlylSubmission : IEntity
     public int SessionId { get; set; }
     public ulong ChannelId { get; set; }
     public ulong MessageId { get; set; }
+    public ulong UserId { get; set; }
     public DateTime SubmissionTime { get; set; }
     public int TotalImages { get; set; }
     public int TotalVideos { get; set; }

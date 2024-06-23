@@ -778,6 +778,12 @@ namespace CoreCodedChatbot.Database.Migrations
                         .HasDefaultValue(0)
                         .HasColumnName("TotalVideos");
 
+                    b.Property<decimal>("UserId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("decimal(20,0)")
+                        .HasDefaultValue(1m)
+                        .HasColumnName("UserId");
+
                     b.HasKey("SubmissionId");
 
                     b.HasIndex("SessionId");

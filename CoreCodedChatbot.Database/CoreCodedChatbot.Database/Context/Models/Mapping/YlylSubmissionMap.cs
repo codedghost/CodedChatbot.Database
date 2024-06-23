@@ -15,6 +15,7 @@ public class YlylSubmissionMap : EntityTypeConfiguration<YlylSubmission>
         builder.Property(y => y.SessionId).HasColumnName("SessionId").IsRequired();
         builder.Property(y => y.ChannelId).HasColumnName("ChannelId").IsRequired();
         builder.Property(y => y.MessageId).HasColumnName("MessageId").IsRequired();
+        builder.Property(y => y.UserId).HasColumnName("UserId").IsRequired().HasDefaultValue(1);
         builder.Property(y => y.SubmissionTime).HasColumnName("SubmissionTime").IsRequired();
         builder.Property(y => y.TotalImages).HasColumnName("TotalImages").HasDefaultValue(0);
         builder.Property(y => y.TotalVideos).HasColumnName("TotalVideos").HasDefaultValue(0);
